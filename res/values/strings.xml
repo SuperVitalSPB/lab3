@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--  Главная форма -->
+    <string name="app_name">Тестовое задание 3</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_section1">Секция 1</string>
+    <string name="title_section2">Секция 2</string>
+    <string name="title_section3">Секция 3</string>
+    <string name="sBtnReg">Регистрация</string>
+    <string name="sNotConnection">Нет соединения</string>
+   
+<!--  Логин -->
+    <string name="title_activity_login">Регистрация</string>
+    <string name="prompt_login">Логин</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in_short">Заполните</string>
+    <string name="error_invalid_password">Пароль слишком короткий</string>
+    <string name="error_incorrect_password">Пароль не верный</string>
+    <string name="error_field_required">Поле должно быть заполнено</string>
+    <string name="sButton">Кнопка</string>  
+    <string name="sOkLogin">Пользователь:</string>
+    <string name="sNotLogin">НЕ залогинились!</string>
+    
+	<string name="sTitleSec1">курс валют на %s:</string>
+	<string name="sSeparator">"-"</string>
+	<string name="sDynam">"Динамика курса"</string>
+	
+	
+</resources>
