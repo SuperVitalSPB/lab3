@@ -11,4 +11,5 @@ public class CurrDynam {
 		this.dDate = dDate;
 		this.Rate = Rate;
 	}
+	
 }

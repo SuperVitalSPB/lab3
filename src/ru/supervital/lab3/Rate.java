@@ -1,6 +1,8 @@
 package ru.supervital.lab3;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class Rate {
@@ -12,8 +14,10 @@ public class Rate {
     public ArrayList<CurrDynam> Dynam;
     public String ID;
     public String NumCode;
-    
-    
+    public double maxRate;
+    public double minRate;
+	public ArrayList<Number> Dates = new ArrayList<Number>(); 
+	public ArrayList<Number> Rates = new ArrayList<Number>();
     
     public Rate(String Code, double Rate, String Nominal, String Name){
     	super();

@@ -1,88 +1,45 @@
 package ru.supervital.lab3;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import ru.supervital.lab3.CurrDynam;
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.res.Resources.Theme;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
 
 
-public class GraphDynam extends DrawView {
-	public Activity mActivity;
+public class GraphDynam  {
+	public MainActivity mActivity;
 	public Rate Valute;
-	Date DateRange1;
-	Date DateRange2;
+	public Date DateRange1;
+	public Date DateRange2;
+	public View mFormView;
+	public View mStatusView;
+	public LinearLayout mProgressBar;
 	
-    @Override
-    protected void onDraw(Canvas canvas){
-        super.onDraw(canvas);
-        // Valute.Dynam
-        if (Valute.Dynam == null || DateRange1 == null|| DateRange2 == null) return;
-        
-
-        convertCoord(Valute.Dynam, height); // конвертнули его
-
-        float gX, gY;
-        float nX = 0, nY = 0;
-        int xScale = 1, yScale = 1;
-        
-        paint.setStrokeWidth(2);
-        
-        double days = daysBetween(DateRange1, DateRange2);
-        
-        double i = 1;
-        double p = height / days;
-        int rec = 0;
-        float deltaY = 0;
-        try 
-        {
-	        while  (i < p * days && rec < Valute.Dynam.size()-1) {
-	        	gX = (float) i * xScale; 
-	        	gY = (float) Valute.Dynam.get(rec).Rate * yScale + deltaY * 2;
-	        	
-	        	if (nX != 0 && nY != 0){
-	        		paint.setColor(Color.BLUE);
-	        		canvas.drawLine(nX, nY, gX, gY, paint);
-	        		deltaY = nY-gY;
-	        	}
-	        	
-	        	paint.setColor(Color.RED);
-	        	canvas.drawPoint(gX, gY, paint);
-	
-	        	paint.setColor(Color.GREEN);
-	        	paint.setTextSize(height/10);
-	//        	canvas.drawText(String.valueOf(z[i-1]), gX, gY-3, paint);
-	        	
-	        	nX = gX;
-	        	nY = gY;
-	        	
-	        	rec++;
-	        	i = i + p;
-	        } // while
-        
-	    } catch (Exception e) {
-	    	e.printStackTrace();
-	    }
-        
-    }
-	
-    Boolean aResult;
+    public Boolean aResult = false;
     
-    public void LoadDynam(){
+    public void LoadDynam(int aPeriod){
+    	if (Valute == null) return; // || aResult) return;
+    	aResult = true;
 		mt = new DynamSendPost(null, null, aResult);			
-
+		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
 		nameValuePairs.add(new BasicNameValuePair("VAL_NM_RQ", Valute.ID));
 		
@@ -90,27 +47,23 @@ public class GraphDynam extends DrawView {
 		c.getTime(); 
 		c.add(Calendar.DATE, 1);
 		String sCurrDate2 = new SimpleDateFormat("dd/MM/yyyy").format(c.getTime());
-		c.add(Calendar.DATE, -30);
+		c.add(Calendar.DATE, -aPeriod);
 		String sCurrDate1 = new SimpleDateFormat("dd/MM/yyyy").format(c.getTime());
 		
 		nameValuePairs.add(new BasicNameValuePair("date_req1", sCurrDate1));
 		nameValuePairs.add(new BasicNameValuePair("date_req2", sCurrDate2));
 		
-		
 		mt.mActivity = mActivity;
 //		http://www.cbr.ru/scripts/XML_dynamic.asp?date_req1=02/03/2001&date_req2=14/03/2013&VAL_NM_RQ=R01235		
 		mt.Url = "http://www.cbr.ru/scripts/XML_dynamic.asp";
 		mt.Params = nameValuePairs;
+		mt.mProgressBar = mProgressBar;
+		
 		mt.execute(mt.Url);
     }
 
-    public GraphDynam(Context context) {
-        super(context);
-    }
-
-	
-    public DynamSendPost mt;
     
+    public DynamSendPost mt;
 	public class DynamSendPost extends SendPost {
 		String sRateList = "";
 		
@@ -122,22 +75,26 @@ public class GraphDynam extends DrawView {
 		protected void onPostExecute(final Boolean success){
 			super.onPostExecute(success);			
 			sRateList = mt.sMessage;
-
 			mt.showProgress(true);
 			
+			float maxValue = 0, minValue = 0;			
 			
 			if (success) {
 				SimpleDateFormat xformat = new SimpleDateFormat("dd.MM.yyyy");
-				
-				Date tmpDate = null;
-				float tmpValue = 0;
 
+				
+				String tmpDate = null;
+				float tmpValue = 0;
 				String sCourTag = "";
-		        
+				long longDate;
+				int iD = 0;
+				
 				try {
 			      XmlPullParser xpp = prepareXpp(sRateList);
 			      
 			      Valute.Dynam = new ArrayList<CurrDynam>();
+			      Valute.Dates.clear(); 
+                  Valute.Rates.clear();
 			      
 			      while (xpp.getEventType() != XmlPullParser.END_DOCUMENT) { // 1
 			    	  
@@ -149,7 +106,8 @@ public class GraphDynam extends DrawView {
 					          if (sCourTag.equals("Record")) {
 						          for (int i = 0; i < xpp.getAttributeCount(); i++) 
 							            if (xpp.getAttributeName(i).equals("Date"))
-							            	tmpDate = xformat.parse(xpp.getAttributeValue(i));
+							            	tmpDate = xpp.getAttributeValue(i);
+				            	
 					          } if (sCourTag.equals("ValCurs")) {
 						          for (int i = 0; i < xpp.getAttributeCount(); i++) {
 							            if (xpp.getAttributeName(i).equals("DateRange1"))
@@ -161,9 +119,6 @@ public class GraphDynam extends DrawView {
 		            	}catch(ParseException ex){
 		            		ex.printStackTrace();
 		            	}
-
-		            		
- 
 				          break;
 				        // конец тэга
 				        case XmlPullParser.END_TAG: // 3
@@ -180,7 +135,20 @@ public class GraphDynam extends DrawView {
 			        } // case
 			        
 			        if (tmpDate != null && tmpValue != 0) {
-			        	Valute.Dynam.add(new CurrDynam(tmpDate, tmpValue));
+			        	Locale locale = new Locale("ru","RU");
+			            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, locale);
+			        	Date date = dateFormat.parse(tmpDate);
+			        	
+			        	Valute.Dynam.add(new CurrDynam(date, tmpValue));
+			        	Valute.Rates.add(tmpValue);
+			        	Valute.Dates.add(date.getTime());
+			        	
+			        	if (tmpValue > maxValue) 
+			        			maxValue = tmpValue;
+			        	
+			        	if (minValue == 0 || tmpValue < minValue) 
+			        			minValue = tmpValue;
+			        	
 			        	tmpDate = null;
 			        	tmpValue = 0; 
 			        }
@@ -188,18 +156,43 @@ public class GraphDynam extends DrawView {
 			        xpp.next();
 			        
 			    } // while
-				
+			} catch (Exception exception) {
+	    	    Log.e("lab3", "Получено исключение", exception);
+	    	}			      
+/*				
 		    } catch (XmlPullParserException e) {
 		    	e.printStackTrace();
 		    } catch (IOException e) {
 		    	e.printStackTrace();
 		    }
+			catch (java.text.ParseException e) {
+		            e.printStackTrace();
+			}
+				*/
 		} else { // success
-				
+			String sMsg = "Сервер ЦБ, подлец, не вернул данные!!!!\n" + sRateList;
+			AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+			builder.setTitle("Ошибка");
+			builder.setMessage(sMsg);
+			builder.setCancelable(true);
+			builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() { // Кнопка ОК
+			    @Override
+			    public void onClick(DialogInterface dialog, int which) {
+			        // mActivity.finish();					
+			    }
+			});
+			AlertDialog dialog = builder.create();
+			dialog.show();
 		}
+		Valute.maxRate = maxValue;
+		Valute.minRate = minValue;
+			
+		
+		DSF_Graph fragment = ((DSF_Graph) GraphDynam.this.mActivity.mSectionsPagerAdapter.Fragments[1]);
+		fragment.setCaptionLabel();
+		fragment.DrawDynam();
 		mt.showProgress(false);
 		mt = null;
-
 	} // onPostExecute
 
 		
@@ -212,7 +205,7 @@ public class GraphDynam extends DrawView {
 		@Override
 		protected void onCancelled() {
 			super.onCancelled();
-//			mt = null;
+			mt = null;
 		}
 	}	
 	
@@ -221,3 +214,26 @@ public class GraphDynam extends DrawView {
 		return (long) ((endDate.getTime() - startDate.getTime())/(1000*60*60*24));
 	}	
 }
+
+/*
+  			        	longDate =  System.currentTimeMillis() + iD; //tmpDate.getTime(); // (tmpDate.getTime() % (86400000));
+			        	
+			        	
+			        	iD = iD + 100;
+			        	
+			        	DateFormat TIMESTAMP = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			        	 
+			        	Log.i("MyApp", TIMESTAMP.format(longDate));
+			        	
+//			        	Valute.Dates.add(Valute.Rates.size());//tmpDate);
+//			            Number[] years = {
+//			                    978307200,  // 2001
+//			                    1009843200, // 2002
+//			                    1041379200, // 2003
+//			                    1072915200, // 2004
+//			                    1104537600  // 2005
+//			            };
+//			        	Valute.Dates.add(years[Valute.Rates.size() % years.length]);
+
+  
+ */

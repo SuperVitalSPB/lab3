@@ -191,8 +191,6 @@ cancel = false;
 			if (mt == null) mt = new LoginSendPost(null, null, aResult); else return;
 			
 			mt.mActivity = this; 			
-			mt.mFormView = mLoginFormView;
-			mt.mStatusView = mLoginStatusView;
 			mt.Url = "http://www.cbr.ru/scripts/XML_daily.asp";   
 
 			mt.execute(mt.Url);

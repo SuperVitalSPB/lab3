@@ -1,22 +1,31 @@
 package ru.supervital.lab3;
 
-
-import ru.supervital.lab3.R;
+import java.util.Locale;
 
 import android.app.ActionBar;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.view.Window;
-import android.widget.Toast;
-import android.content.Context;
-import android.content.Intent;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
 
+	
+	public static final String TAG = "lab3";
+	
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -31,18 +40,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
 
-/*!!!!!!*/		/*!!!!!!*/				/*!!!!!!*/						
-//mViewPager.setCurrentItem(1); // показываем вторую закладку
-/*!!!!!!*/		/*!!!!!!*/				/*!!!!!!*/
-
-
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,19 +48,17 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(2);//ActionBar.NAVIGATION_MODE_TABS);   
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		mSectionsPagerAdapter.mContext = this;
 		mSectionsPagerAdapter.isOnline = isOnline();
 		
-				
+
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		
 
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -74,7 +70,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 					}
 				});
 		
-
+		String sTitle = "";
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
 			// Create a tab with text corresponding to the page title defined by
@@ -82,29 +78,31 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			// the TabListener interface, as the callback (listener) for when
 			// this tab is selected.
 			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
+			if (i == 0) {
+				sTitle = getString(R.string.title_Rate);
+			} else if (i == 1) {
+				sTitle = getString(R.string.title_Graph);
+			} else if (i == 2) {
+				sTitle = getString(R.string.title_Map);
+			} 	
+			actionBar.getTabAt(i).setText(sTitle);
 		}
 		
-		
 	}
-	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 	
 	@Override
 	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
 		// the ViewPager.
 		mViewPager.setCurrentItem(tab.getPosition());
-//		Toast toast = Toast.makeText(getApplicationContext(), String.valueOf(tab.getPosition()), Toast.LENGTH_SHORT); 
-//		toast.show();
-		
-		
-/*!!!!!!!!!!!!!!*/  /*!!!!!!!!!!!!!!*/ /*!!!!!!!!!!!!!!*/
-//if (mSectionsPagerAdapter.getFragment(1) == null) return;		
-//((DummySectionFragment2) mSectionsPagerAdapter.getFragment(1)).gd.LoadDynam();
-/*!!!!!!!!!!!!!!*/  /*!!!!!!!!!!!!!!*/ /*!!!!!!!!!!!!!!*/
-
-
 	}
 
 	@Override
@@ -113,42 +111,15 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 	@Override
 	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-/*		
-		if ( ) {
-			DummySectionFragment fragment = (DummySectionFragment) mSectionsPagerAdapter.getFragment(0);
-			fragment.LoadRate();
-		}
-*/		
-//		if (fragment == null) tab.select();
-	}
-
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == mSectionsPagerAdapter.requestLoginCode) {
-			DummySectionFragment fragment = (DummySectionFragment) mSectionsPagerAdapter.getFragment(0);
-			if (fragment != null) {
-				if (resultCode == RESULT_OK & data != null) {
-					fragment.logToken = data.getStringExtra(LoginActivity.logTokenKey);
-					fragment.logName  = data.getStringExtra(LoginActivity.logNameKey);
-				}else {
-					fragment.logToken = "";
-					fragment.logName  = "";
-				}
-				fragment.TabSelected();
-			}
-		}
 	}
 	
 	public boolean isOnline() {
-	  String cs = Context.CONNECTIVITY_SERVICE;
-	  ConnectivityManager cm = (ConnectivityManager) getSystemService(cs);
-	  if (cm.getActiveNetworkInfo() == null) {
-	    return false;
-	  }
-	  return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+		  String cs = Context.CONNECTIVITY_SERVICE;
+		  ConnectivityManager cm = (ConnectivityManager) getSystemService(cs);
+		  if (cm.getActiveNetworkInfo() == null) {
+		    return false;
+		  }
+		  return cm.getActiveNetworkInfo().isConnectedOrConnecting();
 	}
-	
-}
 
+}

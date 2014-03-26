@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sec3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+<!-- 	 android:apiKey="P0ISOJzaJroC6ZoQBfWMvGZ2GMAMR6Z~PWfnkKbKuY4xgNOXBJrzVQWB~oeWHC8k0BF1v3EWPCxLB7xQSF7lXsPgJfppsms6V-ewqcg3ZLg="  -->
+<!--     android:apiKey="1234567890" -->
+
+   <LinearLayout
+       android:id="@+id/lay"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:orientation="vertical" >
+
+       <ru.yandex.yandexmapkit.MapView
+           android:id="@+id/map"
+           android:layout_width="match_parent"
+           android:layout_height="445dp"
+           android:apiKey="P0ISOJzaJroC6ZoQBfWMvGZ2GMAMR6Z~PWfnkKbKuY4xgNOXBJrzVQWB~oeWHC8k0BF1v3EWPCxLB7xQSF7lXsPgJfppsms6V-ewqcg3ZLg=" />
+   </LinearLayout>
+
+   <Button
+       android:id="@+id/btnShowAll"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_alignParentRight="true"
+       android:text="@string/btnShowAll" />
+		
+</RelativeLayout>

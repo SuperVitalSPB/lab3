@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.supervital.lab3"
-    android:versionCode="2"
-    android:versionName="2.0" >
-<!-- FILE 3 --><!-- FILE 3 --><!-- FILE 3 --><!-- FILE 3 --><!-- FILE 3 -->
-    <uses-sdk
-        android:minSdkVersion="5"
-        android:targetSdkVersion="5" />
-    
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
-		    
+    android:versionCode="1"
+    android:versionName="1.0" >
 
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />  
+    
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-                <!-- AppTheme  LoginFormContainer -->
-
         <activity
             android:name="ru.supervital.lab3.MainActivity"
             android:label="@string/app_name" >
@@ -28,16 +33,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
-            android:name="ru.supervital.lab3.LoginActivity"
-            android:label="@string/title_activity_login"
+            android:name="ru.supervital.lab3.ImageActivity"
+            android:label="@string/MyHouse"
             android:parentActivityName="ru.supervital.lab3.MainActivity"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.supervital.lab3.MainActivity" />
         </activity>
-    
+        
     </application>
-    
+
 </manifest>

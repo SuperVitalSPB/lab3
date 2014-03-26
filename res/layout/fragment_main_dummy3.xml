@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sec3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -8,20 +9,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity$DummySectionFragment" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/images" />
+<!-- 	 android:apiKey="P0ISOJzaJroC6ZoQBfWMvGZ2GMAMR6Z~PWfnkKbKuY4xgNOXBJrzVQWB~oeWHC8k0BF1v3EWPCxLB7xQSF7lXsPgJfppsms6V-ewqcg3ZLg="  -->
+<!--     android:apiKey="1234567890" -->
 
-    <TextView
-        android:id="@+id/lblSection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/imageView1"
-        android:layout_marginTop="50dp"
-        android:text="Закладка в разработке"
-        android:textIsSelectable="false" />
+   <LinearLayout
+       android:id="@+id/lay"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical" >
 
+       <ru.yandex.yandexmapkit.MapView
+           android:id="@+id/map"
+           android:layout_width="match_parent"
+           android:layout_height="380dp"
+           android:layout_alignParentRight="true" 
+           android:apiKey="P0ISOJzaJroC6ZoQBfWMvGZ2GMAMR6Z~PWfnkKbKuY4xgNOXBJrzVQWB~oeWHC8k0BF1v3EWPCxLB7xQSF7lXsPgJfppsms6V-ewqcg3ZLg=" />
+   </LinearLayout>
+
+   <Button
+       android:id="@+id/btnTest"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_alignParentRight="true"
+       android:text="@string/btnShowAll" />
+		
 </RelativeLayout>

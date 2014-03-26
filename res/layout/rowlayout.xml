@@ -1,55 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@layout/rowlayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" xmlns:android1="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="22sp"
-        android:layout_height="22sp"
-        android:layout_marginLeft="4sp"
-        android:layout_marginRight="10sp"
-        android:layout_marginTop="4sp"
-        android:src="@drawable/ic_launcher" >
-    </ImageView>
+    <TableRow
+        android1:layout_width="fill_parent"
+        android1:layout_height="wrap_content"
+        android1:layout_weight="1" >
+	    
+        <ImageView
+            android1:id="@+id/icon"
+            android1:layout_width="22sp"
+            android1:layout_height="22sp"
+            android1:layout_marginRight="10sp"
+            android1:src="@drawable/ic_launcher" />
 
-    <TextView
-        android:id="@+id/txtNominal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="22.05"
-        android:hint="@+id/label"
-        android:textSize="20sp" />
+        <TextView
+            android1:id="@+id/txtNominal"
+            android1:layout_width="100dp"
+            android1:layout_height="wrap_content"
+            android1:hint="@+id/label"
+            android1:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/Space1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sSeparator"
-        android:textSize="20sp" >
-    </TextView>
+        <TextView
+            android1:id="@+id/txtCode"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:layout_weight="1"
+            android1:text="@+id/label"
+            android1:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/txtCode"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:text="@+id/label"
-        android:textSize="20sp" />
+        <TextView
+            android1:id="@+id/txtRate"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:layout_weight="1"
+            android1:hint="@+id/label"
+            android1:textSize="20sp" />	
 
-    <TextView
-        android:id="@+id/Space2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sSeparator"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/txtRate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="22.05"
-        android:hint="@+id/label"
-        android:textSize="20sp" />
+	</TableRow>
 
 </LinearLayout>

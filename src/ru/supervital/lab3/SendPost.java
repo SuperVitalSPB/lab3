@@ -1,25 +1,14 @@
 package ru.supervital.lab3;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.io.StringWriter;
-import java.net.URLEncoder;
-import java.text.ParseException;
 import java.util.List;
-import javax.xml.transform.Result;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -29,11 +18,14 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.database.MatrixCursor;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.NetworkOnMainThreadException;
-import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 public class SendPost extends AsyncTask<String, Void, Boolean> {
   public String Url;
@@ -42,6 +34,7 @@ public class SendPost extends AsyncTask<String, Void, Boolean> {
   public View mFormView;
   public View mStatusView;
   public String sMessage;
+  public LinearLayout mProgressBar;
   
   /** 
    * перед выполнением
@@ -134,7 +127,6 @@ public class SendPost extends AsyncTask<String, Void, Boolean> {
 		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
 			int shortAnimTime = mActivity.getResources().getInteger(android.R.integer.config_shortAnimTime);
-			if (mStatusView == null) return;
 			
 			mStatusView.setVisibility(View.VISIBLE);
 			mStatusView.animate().setDuration(shortAnimTime)
@@ -176,4 +168,6 @@ public class SendPost extends AsyncTask<String, Void, Boolean> {
 	    return xpp;
 	}
 	
+
+	    
 }	

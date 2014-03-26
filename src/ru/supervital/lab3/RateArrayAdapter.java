@@ -23,15 +23,16 @@ public class RateArrayAdapter extends ArrayAdapter <Rate> {
         this.rates = rates;
     }
 
-	// Класс для сохранения во внешний класс и для ограничения доступа
-    // из потомков класса
+// Класс для сохранения во внешний класс и для ограничения доступа
+// из потомков класса
     static class ViewHolder {
-        public ImageView imageView;
+        public ImageView Icon;
         public TextView txtCode;
         public TextView txtRate;
         public TextView txtNominal;
         public TextView txtName;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -45,7 +46,7 @@ public class RateArrayAdapter extends ArrayAdapter <Rate> {
             LayoutInflater inflater = context.getLayoutInflater();
             rowView = inflater.inflate(R.layout.rowlayout, null, true);
             holder = new ViewHolder();
-            holder.imageView =  (ImageView) rowView.findViewById(R.id.icon);
+            holder.Icon =  (ImageView) rowView.findViewById(R.id.icon);
             holder.txtCode =    (TextView) rowView.findViewById(R.id.txtCode);
             holder.txtRate =    (TextView) rowView.findViewById(R.id.txtRate);
             holder.txtNominal = (TextView) rowView.findViewById(R.id.txtNominal);
@@ -56,18 +57,15 @@ public class RateArrayAdapter extends ArrayAdapter <Rate> {
         holder.txtCode.setText((CharSequence) rates.get(position).Code);
         holder.txtRate.setText((CharSequence) String.valueOf(rates.get(position).Rate));
         holder.txtNominal.setText((CharSequence) rates.get(position).Nominal);
-//        holder.txtName.setText((CharSequence) rates.get(position).ValName);        
-/*        
-        // Изменение иконки для Windows и iPhone
-        String s = names[position];
-        if (s.startsWith("Windows7") || s.startsWith("iPhone")
-                || s.startsWith("Solaris")) {
+        
+        String str = rates.get(position).Code.toLowerCase();
+        int ident = context.getResources().getIdentifier(str, 
+        												"drawable", 
+        												"ru.supervital.lab3");
+        if (ident != 0) {  
+        	holder.Icon.setImageResource(ident);
+        } else holder.Icon.setImageResource(R.drawable.ic_android);
 
-            holder.imageView.setImageResource(R.drawable.no);
-        } else {
-            holder.imageView.setImageResource(R.drawable.ok);
-        }
-*/
         return rowView;
     }
 }
