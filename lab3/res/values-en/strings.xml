@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Английсий-->
+<resources>
+    <string name="app_name">Test task 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_Rate">Exchange Rates</string>
+    <string name="title_Graph">Schedule</string>
+    <string name="title_Map">Map</string>
+    <string name="sBtnReg">Registration</string>
+    <string name="sButton">button</string>    
+    <string name="sNotConnection">No connect</string>
+    <string name="title_activity_login">Registration</string>
+    <string name="prompt_login">Login</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Fill</string>
+    <string name="error_invalid_password">Password is too short</string>
+    <string name="error_incorrect_password">The password is not correct</string>
+    <string name="error_field_required">Required field</string>
+    <string name="sOkLogin">User:</string>
+    <string name="sNotLogin">Not logged in!</string>
+	<string name="sTitleSec1">rate of exchange %s:</string>
+	<string name="sDynam">Dynamics</string>    
+	<string name="sSeparator">-</string>
+    <string name="sNoData">There is no data to plot</string>
+    <string name="sCapGr">Change rate %s with respect to RUR</string>
+    <string name="sSelVal">Long press will currency Select in the list</string>
+    <string name="sDatePeriod" formatted="false">%s to %s</string>
+    <string name="sPeriod">Period:</string>
+	<string name="sPeriodMonth">Month</string>
+	<string name="sPeriodQuarter">Quarter</string>
+	<string name="sPeriodHY">Half-Year</string>
+	<string name="sPeriodYear">Year</string>
+	<string name="sPeriodAllData">All Data</string>
+	<string name="sLoading">Loading.....</string>
+	<string name="MyHouse">Here we live</string> 
+	<string name="MyWork">My job, ZAO "Peter-Service"</string> 
+	<string name="MyLove">parents house my Masha</string> 
+	<string name="btnShowAll">Show all</string>	
+<!--Английсий-->    
+</resources>

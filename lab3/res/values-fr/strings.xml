@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Французский-->
+<resources>
+    <string name="app_name">Tâche de test 3</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="title_Rate">Taux de change</string>
+    <string name="title_Graph">Calendrier</string>
+    <string name="title_Map">Carte</string>
+    <string name="sBtnReg">Inscription</string>
+    <string name="sButton">bouton</string>
+    <string name="sNotConnection">Pas de connexion</string>
+    <string name="title_activity_login">Inscription</string>
+    <string name="prompt_login">Connexion</string>
+    <string name="prompt_password">mot de passe</string>
+    <string name="action_sign_in_short">remplir</string>
+    <string name="error_invalid_password">Mot de passe est trop court</string>
+    <string name="error_incorrect_password">Le mot de passe nest pas correct</string>    
+    <string name="error_field_required">Champs obligatoires</string>
+    <string name="sOkLogin">Utilisateur:</string>
+    <string name="sNotLogin">Non connecté!</string>
+    <string name="sTitleSec1">taux de change %s:</string>
+    <string name="sDynam">Dynamique</string>
+    <string name="sSeparator">-</string>
+    <string name="sNoData">Il nexiste pas de donnees pour tracer</string>
+    <string name="sCapGr">Taux de changement %s par rapport a RUR</string>
+    <string name="sSelVal">Pression longue Devise Selectionnez dans la liste</string>
+    <string name="sDatePeriod" formatted="false">%s to %s</string>
+    <string name="sPeriod">Période:</string>
+	<string name="sPeriodMonth">Mois</string>    
+	<string name="sPeriodQuarter">Trimestre</string>
+	<string name="sPeriodHY">Six mois</string>
+	<string name="sPeriodYear">Année</string>
+	<string name="sPeriodAllData">Toutes les données</string>
+	<string name="sLoading">Loading.....</string>
+	<string name="MyHouse">Ici, nous vivons</string> 
+	<string name="MyWork">Mon métier, ZAO "Peter-Service"</string> 
+	<string name="MyLove">la maison de mes parents Masha</string> 
+	<string name="btnShowAll"> Afficher tous </string>
+<!--Французский-->
+</resources>

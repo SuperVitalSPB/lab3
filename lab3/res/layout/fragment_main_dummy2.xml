@@ -1,0 +1,117 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/sec2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="0dp"
+    android:layout_marginTop="0dp"
+    android:weightSum="100"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+    <LinearLayout
+        android:id="@+id/ll_progressbar"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:gravity="center_horizontal"
+	    android:orientation="vertical"
+	    android:visibility="gone" >
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/llCap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/lblCap"
+            style="@style/AppBaseTheme"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:tag="@android:string/httpErrorBadUrl"
+            android:text="Cap1" />
+
+    </LinearLayout>
+
+    <com.androidplot.xy.XYPlot
+        android:id="@+id/oneChart"
+        android:layout_width="match_parent"
+        android:layout_height="219dp"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="10px"
+        android:layout_weight="2.41" />
+
+    <LinearLayout
+        android:id="@+id/llPeriod"
+        android:layout_width="match_parent"
+        android:layout_height="141dp"
+        android:orientation="horizontal"
+        android:paddingTop="20dp" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sPeriod"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <RadioGroup
+            android:id="@+id/rgPeriod"
+            android:layout_width="wrap_content"
+            android:layout_height="106dp"
+            android:orientation="vertical" >
+
+            <RadioButton
+                android:id="@+id/rbMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:tag="30"
+                android:text="@string/sPeriodMonth" />
+
+            <RadioButton
+                android:id="@+id/rbQuarter"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:tag="90"
+                android:text="@string/sPeriodQuarter" />
+
+            <RadioButton
+                android:id="@+id/rbHY"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:tag="180"
+                android:text="@string/sPeriodHY" />
+
+            <RadioButton
+                android:id="@+id/rbYear"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:tag="365"
+                android:text="@string/sPeriodYear" />
+
+            <RadioButton
+                android:id="@+id/rbAllData"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:tag="100000"
+                android:text="@string/sPeriodAllData"
+                android:visibility="invisible" />
+
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>

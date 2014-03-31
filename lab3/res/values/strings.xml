@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--  Русский -->    
+    <string name="app_name">Тестовое задание 3</string>
+    <string name="action_settings">Настройки</string>
+    <string name="title_Rate">Курсы валют</string>
+    <string name="title_Graph">График</string>
+    <string name="title_Map">Карта</string>
+    <string name="sBtnReg">Регистрация</string>
+    <string name="sNotConnection">Нет соединения</string>
+    <string name="title_activity_login">Регистрация</string>
+    <string name="prompt_login">Логин</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in_short">Заполните</string>
+    <string name="error_invalid_password">Пароль слишком короткий</string>
+    <string name="error_incorrect_password">Пароль не верный</string>
+    <string name="error_field_required">Поле должно быть заполнено</string>
+    <string name="sButton">Кнопка</string>  
+    <string name="sOkLogin">Пользователь:</string>
+    <string name="sNotLogin">НЕ залогинились!</string>
+	<string name="sTitleSec1">курс валют на %s:</string>
+	<string name="sSeparator">-</string>
+	<string name="sDynam">Динамика курса</string>
+	<string name="sNoData">Отсутствуют данные для построения графика</string>
+	<string name="sCapGr">Изменение курса %s по отношению к RUR</string>
+	<string name="sSelVal">Долгим нажатем выберите валюту из списка</string>
+	<string name="sDatePeriod" formatted="false">с %s по %s</string> 
+	<string name="sPeriod">Период:</string>
+	<string name="sPeriodMonth">Месяц</string>
+	<string name="sPeriodQuarter">Квартал</string>
+	<string name="sPeriodHY">Полгода</string>
+	<string name="sPeriodYear">Год</string>
+	<string name="sPeriodAllData">Все данные</string>
+	<string name="sLoading">Загрузка.....</string>
+	<string name="MyHouse">Здесь мы живем</string>
+	<string name="MyWork">Моя работа, ЗАО "ПЕТЕР-СЕРВИС"</string>
+	<string name="MyLove">Дом Родителей моей Маши</string>
+	<string name="btnShowAll">Показать все объекты</string>
+		
+<!--  Русский -->	
+</resources>
